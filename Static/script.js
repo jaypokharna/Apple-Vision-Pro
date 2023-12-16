@@ -979,7 +979,7 @@ gsap.to("#video11", {
 
 
 // ------------------------------------------------------------------------
-// Page 12 GSAP-Scroll Trigger
+// Page 11 GSAP-Scroll Trigger
 // ------------------------------------------------------------------------
 
 
@@ -994,7 +994,7 @@ let prevIndex;
 const images = document.querySelectorAll(".carousel-image");
 
 const totalImages = Object.keys(images).length;
-console.log("totalImages - "+totalImages);
+console.log("totalImages - " + totalImages);
 
 // Use this in your project, if you're doing it locally
 // const imageWidth = images[1].getBoundingClientRect().x;
@@ -1041,4 +1041,176 @@ rightArrow.addEventListener("click", () => {
 // Page 12 GSAP-Scroll Trigger
 // ------------------------------------------------------------------------
 
+
+function myCanva3(canva) {
+
+  const canvas = canva;
+  const context = canvas.getContext("2d");
+
+  // Frames of apple vision
+  function files(index) {
+    const data = `
+    ./Raw/images/Apple-vision-canvas/Vision00001.png
+    ./Raw/images/Apple-vision-canvas/Vision00002.png
+    ./Raw/images/Apple-vision-canvas/Vision00003.png
+    ./Raw/images/Apple-vision-canvas/Vision00004.png
+    ./Raw/images/Apple-vision-canvas/Vision00005.png
+    ./Raw/images/Apple-vision-canvas/Vision00006.png
+    ./Raw/images/Apple-vision-canvas/Vision00007.png
+    ./Raw/images/Apple-vision-canvas/Vision00008.png
+    ./Raw/images/Apple-vision-canvas/Vision00009.png
+    ./Raw/images/Apple-vision-canvas/Vision00010.png
+    ./Raw/images/Apple-vision-canvas/Vision00011.png
+    ./Raw/images/Apple-vision-canvas/Vision00012.png
+    ./Raw/images/Apple-vision-canvas/Vision00013.png
+    ./Raw/images/Apple-vision-canvas/Vision00014.png
+    ./Raw/images/Apple-vision-canvas/Vision00015.png
+    ./Raw/images/Apple-vision-canvas/Vision00016.png
+    ./Raw/images/Apple-vision-canvas/Vision00017.png
+    ./Raw/images/Apple-vision-canvas/Vision00018.png
+    ./Raw/images/Apple-vision-canvas/Vision00019.png
+    ./Raw/images/Apple-vision-canvas/Vision00020.png
+    ./Raw/images/Apple-vision-canvas/Vision00021.png
+    ./Raw/images/Apple-vision-canvas/Vision00022.png
+    ./Raw/images/Apple-vision-canvas/Vision00023.png
+    ./Raw/images/Apple-vision-canvas/Vision00024.png
+    ./Raw/images/Apple-vision-canvas/Vision00025.png
+
+     `;
+    return data.split("\n")[index];
+  }
+
+  const frameCount = 25;
+
+  const images = [];
+  const imageSeq = {
+    frame: 1,
+  };
+
+  for (let i = 0; i < frameCount; i++) {
+    const img = new Image();
+    img.src = files(i);
+    images.push(img);
+  }
+
+  gsap.to(imageSeq, {
+    frame: frameCount - 1,
+    snap: "frame",
+    ease: `none`,
+    scrollTrigger: {
+      scrub: 2,
+      trigger: `#page12`,
+      start: `20% top`,
+      end: `25% top`,
+      scroller: `#main`,
+      pin: true,
+      // markers : true,
+    },
+    onUpdate: render,
+  });
+
+  gsap.from("#belowp12-canvas", {
+    opacity: 0,
+    scrollTrigger: {
+      trigger: "#page12",
+      scroller: "#main",
+      start: `22% top`,
+      end: `25% top`,
+      scrub: 1,
+      // markers : true
+    }
+  })
+
+  images[1].onload = render;
+
+  function render() {
+    scaleImage(images[imageSeq.frame], context);
+  }
+
+  function scaleImage(img, ctx) {
+    const canvas = ctx.canvas;
+    const hRatio = canvas.width / img.width;
+    const vRatio = canvas.height / img.height;
+    const ratio = Math.max(hRatio, vRatio);
+    const centerShift_x = (canvas.width - img.width * ratio) / 2;
+    const centerShift_y = (canvas.height - img.height * ratio) / 2;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(
+      img,
+      0,
+      0,
+      img.width,
+      img.height,
+      centerShift_x,
+      centerShift_y,
+      img.width * ratio,
+      img.height * ratio
+    );
+  }
+
+}
+
+var myCanvas3 = document.getElementById("page12-canvas");
+myCanva3(myCanvas3);
+
+
+gsap.to("#page12-video", {
+  scrollTrigger: {
+    trigger: "#page12",
+    scroller: "#main",
+    start: "36% top",
+    // markers : true
+  },
+  onStart: () => {
+    document.querySelector("#page12-video").play()
+  }
+
+})
+
+
+gsap.from("#eye-tracking2", {
+  opacity: 0,
+  scrollTrigger: {
+    trigger: "#eye-tracking",
+    scroller: "#main",
+    // markers : true ,
+    start: "10% top",
+    end: "45% top",
+    scrub: true
+  }
+})
+
+
+// ------------------------------------------------------------------------
+// Page 13 GSAP-Scroll Trigger
+// ------------------------------------------------------------------------
+
+
+gsap.to("#sensor-vision>video", {
+  scrollTrigger: {
+    trigger: "#page13",
+    scroller: "#main",
+    start: "-9% top",
+    // markers : true
+  },
+  onStart: () => {
+    document.querySelector("#sensor-vision>video").play()
+  }
+
+})
+
+
+gsap.from("#sensor-chips>img", {
+  opacity: 0,
+  scale: 0.8,
+  scrollTrigger: {
+    trigger: "#sensor-chip-container",
+    scroller: "#main",
+    start: "-70% top",
+    end: "-20% top",
+    // markers : true,
+    scrub: true
+  }
+
+})
 
