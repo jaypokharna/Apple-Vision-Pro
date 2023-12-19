@@ -12,16 +12,6 @@ This project is a clone of the Apple Vision Pro website, showcasing the use of G
 
 While developing this project, I encountered challenges in replicating certain intricate animations. In the future, I plan to implement additional features, optimize performance, and enhance the overall user experience.
 
-## Table of Contents (Optional)
-
-- [How to Install and Run the Project](#how-to-install-and-run-the-project)
-- [How to Use the Project](#how-to-use-the-project)
-- [Credits](#credits)
-- [License](#license)
-- [Badges](#badges)
-- [How to Contribute to the Project](#how-to-contribute-to-the-project)
-- [Include Tests](#include-tests)
-
 ## How to Install and Run the Project
 
 ```
